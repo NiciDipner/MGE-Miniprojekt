@@ -15,8 +15,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View loginView = inflater.inflate(R.layout.fragment_login, container, false);
-        return loginView;
+        View root = inflater.inflate(R.layout.fragment_login, container, false);
+        root.findViewById(R.id.sign_in_button).setOnClickListener(this);
+        root.findViewById(R.id.registerLink).setOnClickListener(this);
+        return root;
     }
 
     @Override
