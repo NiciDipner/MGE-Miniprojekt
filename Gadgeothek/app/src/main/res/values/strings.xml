@@ -17,4 +17,14 @@
     <string name="here">here</string>
     <string name="register_text_before">No account? Click </string>
     <string name="register_text_after"> to Register</string>
+    <string name="register">Register</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="matriculation_number">Matriculation number</string>
+    <string name="street_name">Street</string>
+    <string name="street_number">Number</string>
+    <string name="zip_code">Zip code</string>
+    <string name="city_name">City</string>
+    <string name="password">Password</string>
+    <string name="password_confirmation">Confirm password</string>
 </resources>

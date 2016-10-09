@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends Activity implements LoginFragment.FragmentController, RegisterFragment.FragmentController {
 
     protected boolean authenticated = false;
 
@@ -19,21 +19,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         loadFragment(new Fragment()); //TODO: Implement Home-Screen
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.sign_in_button:
-                makeSnack("Procced to login (TODO)");
-                break;
-            case R.id.registerLink:
-                makeSnack("Procced to registration page (TODO)");
-                break;
-            default:
-                makeSnack("No Action defined!");
-                break;
-        }
-    }
-
     public void makeSnack(String text){
         Snackbar snackbar = Snackbar
                 .make(findViewById(R.id.fragment_container) , text, Snackbar.LENGTH_LONG);
@@ -42,14 +27,38 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     public void loadFragment(Fragment fragment) {
-        if (!authenticated) {
+        if (!authenticated && !(fragment instanceof RegisterFragment)) {
             fragment = new LoginFragment();
         }
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container, fragment);
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.addToBackStack(fragment.toString());
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void loadRegisterFragment() {
+        loadFragment(new RegisterFragment());
+    }
+
+    public void attemptLogin(){
+        makeSnack("Attempting Login (TODO)");
+    }
+
+    @Override
+    public void register() {
+        makeSnack("Registering... (TODO)");
+    }
+
+    @Override
+    public void onBackPressed() {
+        if ( getFragmentManager().getBackStackEntryCount() <= 1 ) {
+            finish();
+        } else {
+            getFragmentManager().popBackStack();
+        }
     }
 }
 

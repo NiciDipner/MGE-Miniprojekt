@@ -8,15 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import ch.hsr.mge.gadgeothek.R;
-
-public class LoginFragment extends Fragment implements View.OnClickListener{
+public class RegisterFragment extends Fragment implements View.OnClickListener{
     private FragmentController activity;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View root = inflater.inflate(R.layout.fragment_login, container, false);
-        root.findViewById(R.id.sign_in_button).setOnClickListener(this);
-        root.findViewById(R.id.registerLink).setOnClickListener(this);
+        View root = inflater.inflate(R.layout.fragment_register, container, false);
+        root.findViewById(R.id.registerButton).setOnClickListener(this);
         return root;
     }
 
@@ -32,16 +30,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.registerLink){
-            activity.loadRegisterFragment();
-        }
-        if (view.getId() == R.id.sign_in_button){
-            activity.attemptLogin();
-        }
+
+        ((FragmentController) getActivity()).register();
     }
 
     public interface FragmentController{
-        void loadRegisterFragment();
-        void attemptLogin();
+        public void register();
     }
 }
