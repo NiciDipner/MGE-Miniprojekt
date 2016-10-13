@@ -7,16 +7,22 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 
 import ch.hsr.mge.gadgeothek.R;
 
 public class LoginFragment extends Fragment implements View.OnClickListener{
     private FragmentController activity;
+    private EditText passwordField;
+    private EditText emailField;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View root = inflater.inflate(R.layout.fragment_login, container, false);
         root.findViewById(R.id.sign_in_button).setOnClickListener(this);
         root.findViewById(R.id.registerLink).setOnClickListener(this);
+        this.passwordField = (EditText) root.findViewById(R.id.password);
+        this.emailField = (EditText) root.findViewById(R.id.email);
         return root;
     }
 
@@ -25,6 +31,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         super.onAttach(activity);
         if (activity instanceof FragmentController) {
             this.activity = (FragmentController) activity;
+
         } else {
             throw new AssertionError("Activity must implement FragmentController!");
         }
@@ -36,12 +43,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             activity.loadRegisterFragment();
         }
         if (view.getId() == R.id.sign_in_button){
-            activity.attemptLogin();
+            activity.attemptLogin(emailField.getText().toString(), passwordField.getText().toString());
         }
     }
 
     public interface FragmentController{
         void loadRegisterFragment();
-        void attemptLogin();
+        void attemptLogin(String email, String password);
     }
 }

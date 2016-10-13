@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
+import ch.hsr.mge.gadgeothek.service.Callback;
+import ch.hsr.mge.gadgeothek.service.LibraryService;
+
 public class MainActivity extends Activity implements LoginFragment.FragmentController, RegisterFragment.FragmentController {
 
     protected boolean authenticated = false;
@@ -15,6 +18,7 @@ public class MainActivity extends Activity implements LoginFragment.FragmentCont
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LibraryService.setServerAddress("http://mge7.dev.ifs.hsr.ch/public");
         setContentView(R.layout.main_activity);
         loadFragment(new Fragment()); //TODO: Implement Home-Screen
     }
@@ -43,13 +47,42 @@ public class MainActivity extends Activity implements LoginFragment.FragmentCont
         loadFragment(new RegisterFragment());
     }
 
-    public void attemptLogin(){
-        makeSnack("Attempting Login (TODO)");
+    public void attemptLogin(String email,String password){
+
+        LibraryService.login(email, password, new Callback<Boolean>() {
+            @Override
+            public void onCompletion(Boolean success) {
+                if(success) {
+                    makeSnack("Success");
+                } else {
+                    makeSnack("Fail!");
+                }
+            }
+            @Override
+            public void onError(String message) {
+                makeSnack(message);
+            }
+        });
     }
 
+
     @Override
-    public void register() {
-        makeSnack("Registering... (TODO)");
+    public void register(String email, String password,  String name, String matriculationNumber ) {
+        makeSnack(email);
+//        LibraryService.register("dummy@test.ch","12345","Dummy","12345",new Callback<Boolean>(){
+//            @Override
+//            public void onCompletion(Boolean success) {
+//                if(success) {
+//                    makeSnack("Success");
+//                } else {
+//                    makeSnack("Couldn't be registered");
+//                }
+//            }
+//            @Override
+//            public void onError(String message) {
+//                makeSnack(message);
+//            }
+//        });
     }
 
     @Override
@@ -60,5 +93,6 @@ public class MainActivity extends Activity implements LoginFragment.FragmentCont
             getFragmentManager().popBackStack();
         }
     }
+
 }
 
