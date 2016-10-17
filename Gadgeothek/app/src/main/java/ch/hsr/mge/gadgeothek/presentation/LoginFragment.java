@@ -1,4 +1,4 @@
-package ch.hsr.mge.gadgeothek;
+package ch.hsr.mge.gadgeothek.presentation;
 
 
 import android.app.Fragment;

@@ -212,6 +212,10 @@ public class LibraryService {
     static Gson createGsonObject() {
         return new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
     }
+
+    public static String getUserName(){
+        return token.getCustomerId();
+    }
 }
 
 

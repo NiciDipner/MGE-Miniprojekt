@@ -1,4 +1,4 @@
-package ch.hsr.mge.gadgeothek;
+package ch.hsr.mge.gadgeothek.presentation;
 
 
 import android.app.Fragment;
@@ -12,6 +12,8 @@ import android.widget.EditText;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import ch.hsr.mge.gadgeothek.R;
 
 public class RegisterFragment extends Fragment implements View.OnClickListener{
     private FragmentController activity;
